@@ -1,4 +1,4 @@
-const path =  require('path');
+const path = require('path');
 
 // __dirname aбсолютный путь 
 // console.log('под любую ос склейка пути', path.join(__dirname,'0', 'one', '..'));
