@@ -10,6 +10,6 @@ emmiter.on('message', callback)
 
 const text = 'text';
 
-if(text) {
-    emmiter.emit('message', `прислали сообщение ${text}`)   
-} else emmiter.emit('message', `не прислали сообщение`)   
+// if(text) {
+//     emmiter.emit('message', `прислали сообщение ${text}`)   
+// } else emmiter.emit('message', `не прислали сообщение`)   
