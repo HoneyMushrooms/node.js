@@ -1,10 +1,12 @@
 const http = require('http');
-const Emmiter = require('events');
+const EventEmitter = require('events');
 const PORT = process.env.PORT || 5000;
 
-const emmit = new Emmiter(); 
+const emmitter = new EventEmitter(); 
+a = 1
 
 class Router{
+    
     constructor(){
         this.endpoints = {}
     }
@@ -13,15 +15,15 @@ class Router{
         if(!this.endpoints[path]){
             this.endpoints[path] = {}
         }
-
-        const endpoint = this.endpoints[path];
+        const endpoint = this.endpoints[path]
 
         if(endpoint[method]) {
-            throw new Error(`[${method}] по адресу ${path} уже существует`)
+            console.log(new Error(`[${method}] по адресу ${path} уже существует`))
         }
-
         endpoint[method] = handler
-        emmit.on(`[${path}]:[${method}]`, (req, res) => {
+
+        emmitter.on(`[${path}]:[${method}]`, (req, res) => {
+            console.log('we there')
             handler(req, res)
         })
     }
@@ -42,22 +44,24 @@ class Router{
 
 const router = new Router();
 
-router.get('/users', (req, res) => {
-    res.end('Users')
+router.get('/a', (req, res) => {
+    res.end('win')
 })
 
+
 router.get('/posts', (req, res) => {
-    res.end('Posts')
+    res.end('win')
 })
 
 const server = http.createServer((req, res) => {
-
-    const emmitted = emmit.emit(`[${req.url}]:[${req.method}}]`, req, res)
+    console.log('a = ', a++)
+    const emmitted = emmitter.emit(`[${req.url}]:[${req.method}]`, req, res)
     
     if(!emmitted){
+        res.write('ss')
         res.end(req.url)
     }
-
+ 
 })
 
 server.listen(PORT, () =>{
