@@ -8,12 +8,12 @@ module.exports = class Router{
         if(!this.endpoints[path]){
             this.endpoints[path] = {}
         }
-        const endpoint = this.endpoints[path]
 
-        if(endpoint[method]) {
+        if(this.endpoints[path][method]) {
             console.log(new Error(`[${method}] по адресу ${path} уже существует`))
         }
-        endpoint[method] = handler
+
+        this.endpoints[path][method] = handler
     }
 
     get(path, handler) {
